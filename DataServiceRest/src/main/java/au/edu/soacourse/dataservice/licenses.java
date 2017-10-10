@@ -88,7 +88,7 @@ public class licenses implements InitializingBean{
     	selects = new ArrayList<String>(Arrays.asList(select.split("\\s*,\\s*")));
     	for (int i = 0; i < selects.size(); i++){
     		String s = selects.get(i);
-    		Pattern p = Pattern.compile(".*Class (\\w).*");
+    		Pattern p = Pattern.compile(".*Class (\\w+).*");
     		Matcher mp = p.matcher(s);
     		if (mp.matches()){
     			selects.set(i, mp.group(1));;
@@ -102,7 +102,7 @@ public class licenses implements InitializingBean{
 	private String orderXml(String orderby, String xml) throws SaxonApiException, IOException{
 		if (orderby == null) return xml;
 		String order = null;
-		Pattern p = Pattern.compile(".*Class (\\w).*");
+		Pattern p = Pattern.compile(".*Class (\\w+).*");
 		Matcher mp = p.matcher(orderby);
 		if (mp.matches()){
 			order = mp.group(1);
@@ -112,7 +112,7 @@ public class licenses implements InitializingBean{
     	InputStream simpleSelect = servletContext.getResourceAsStream("/WEB-INF/filterPostcode.xq");
     	XQueryProcessor xq = new XQueryProcessor();
     	Map<String, String> ps = new HashMap();
-    	ps.put("name", orderby);
+    	ps.put("name", order);
 		return xq.executeXQuery(simpleSelect, xml, ps);
 	}
 
