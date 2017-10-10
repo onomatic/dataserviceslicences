@@ -1,6 +1,5 @@
 package au.edu.soacourse.dataservice;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,37 +26,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 public class grabData {
-	
-	
-	private static String executeXQuery(String filename) throws SaxonApiException, IOException{
-		Processor saxon = new Processor(false);
-		XQueryCompiler compiler = saxon.newXQueryCompiler();
-		XQueryExecutable exec = compiler.compile(new File(filename));
-		DocumentBuilder builder = saxon.newDocumentBuilder();
-		Source src = new StreamSource(new File("licence.xml"));
-		XdmNode doc = builder.build(src);
-		
-		XQueryEvaluator query = exec.load();
-		query.setContextItem(doc);
-		query.setExternalVariable(new QName("quarter"), new XdmAtomicValue("1"));
-		query.setExternalVariable(new QName("postcode"), new XdmAtomicValue(""));
-
-		XdmValue result = query.evaluate();
-		System.out.println(result.toString());
-		return filename;
-	}
-	
-	public static void main(String [] args){
-		grabData gd = new grabData();
-		ArrayList<Map<String,License>> l = new ArrayList();
-		for (int i = 1; i <= 4; i++){
-			l.add(gd.grab(i));
-		}
-		createXml cx = new createXml();
-		cx.createRawXml(l, "license.xml");
-		
-		
-	}
 	
 	
 	private String classUrl = "http://www.rms.nsw.gov.au/about/corporate-publications/"

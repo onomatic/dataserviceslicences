@@ -48,7 +48,6 @@ public class createXml {
             XMLOutputter outputter = new XMLOutputter(); 
             outputter.setFormat(Format.getPrettyFormat());
             outputter.output(d, writer);
-            outputter.output(d, System.out);
         } catch (Exception e) {
             e.printStackTrace();
         }
