@@ -7,7 +7,6 @@
     <bean class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer"/>
     <jaxrs:server id="services" address="/">
         <jaxrs:serviceBeans>
-            <bean class="au.edu.soacourse.dataservice.HelloWorld"/>
             <bean class="au.edu.soacourse.dataservice.licenses"/>
         </jaxrs:serviceBeans>
         <jaxrs:providers>

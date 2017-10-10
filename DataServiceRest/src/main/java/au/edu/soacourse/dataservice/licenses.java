@@ -19,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
@@ -73,6 +74,7 @@ public class licenses implements InitializingBean{
     	Pattern p = Pattern.compile(".*postcode eq (\\d{4}).*");
     	Matcher mp = p.matcher(filter);
     	if (mp.matches()) postcode = mp.group(1);
+    	if (quarter == null && postcode == null) throw new WebApplicationException(Response.Status.BAD_REQUEST); 
     	if (quarter == null) quarter = "";
     	if (postcode == null) postcode = "";
     	Map<String, String> ps = new HashMap();
